@@ -4,7 +4,7 @@ import pytesseract
 
 
 class OCR:
-    def __init__(self, docpath):
+    def __init__(self, docpath=None):
         self.docpath = (
             docpath if docpath is not None else Utils.asset_path("europass_resume.jpg")
         )

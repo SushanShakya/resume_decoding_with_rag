@@ -1,24 +1,26 @@
 from src.utils import Utils
-import torch
 
 
 class LLM:
-    def __init__(self, docpath):
-        self.docpath = docpath
+    def __init__(
+        self,
+        system_prompt="",
+    ):
+        self.model = "distilbert/distilbert-base-cased-distilled-squad"
         self.llm = self.init_llm()
+        self.system_prompt = system_prompt
 
     def init_llm(self):
         from transformers import pipeline
 
         return pipeline(
-            task="document-question-answering",
-            model="naver-clova-ix/donut-base-finetuned-docvqa",
-            device=0,
-            dtype=torch.float16,
+            "question-answering",
+            model=self.model,
         )
 
-    def ask(self, question):
-        resume_path = Utils.asset_path(self.docpath)
-        answer = self.llm(resume_path, question)
-        print(answer)
+    def ask(self, query):
+        answer = self.llm(
+            context=self.system_prompt,
+            question=query,
+        )
         return answer
