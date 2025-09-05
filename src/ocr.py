@@ -4,8 +4,10 @@ import pytesseract
 
 
 class OCR:
-    def __init__(self):
-        self.docpath = Utils.asset_path("europass_resume.jpg")
+    def __init__(self, docpath):
+        self.docpath = (
+            docpath if docpath is not None else Utils.asset_path("europass_resume.jpg")
+        )
 
     def extract_text(self):
         image = Image.open(self.docpath).convert("RGB")
