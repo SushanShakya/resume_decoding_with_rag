@@ -23,4 +23,4 @@ class LLM:
             context=self.system_prompt,
             question=query,
         )
-        return answer
+        return answer["answer"]
