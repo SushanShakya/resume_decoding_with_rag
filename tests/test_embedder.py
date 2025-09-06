@@ -16,3 +16,12 @@ class TestEmbedder(TestCase):
         ]
         embeddings = e.embed(texts)
         self.assertEqual(embeddings.shape[0], 2)
+
+    def test_distance(self):
+        e = Embedder()
+        text = ["Sushan Shakya"]
+        embeddings = e.embed(text)
+        query = text
+        diff = e.difference(query, embeddings)
+
+        self.assertEqual(diff, 0)
